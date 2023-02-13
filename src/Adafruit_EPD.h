@@ -25,8 +25,9 @@
 #define RAMBUFSIZE 64 ///< size of the ram buffer
 
 #include "Adafruit_MCPSRAM.h"
-#include <Adafruit_GFX.h>
-#include <Adafruit_SPIDevice.h>
+#include "../../Adafruit_GFX_Library/Adafruit_GFX.h"
+#include "../../Adafruit_BusIO/Adafruit_SPIDevice.h"
+#define EPD_UNUSED(x) (void)(x)
 
 /**************************************************************************/
 /*!
@@ -64,11 +65,11 @@ typedef enum {
 /**************************************************************************/
 class Adafruit_EPD : public Adafruit_GFX {
 public:
-  Adafruit_EPD(int width, int height, int16_t SID, int16_t SCLK, int16_t DC,
-               int16_t RST, int16_t CS, int16_t SRCS, int16_t MISO,
-               int16_t BUSY = -1);
-  Adafruit_EPD(int width, int height, int16_t DC, int16_t RST, int16_t CS,
-               int16_t SRCS, int16_t BUSY = -1, SPIClass *spi = &SPI);
+  Adafruit_EPD(int width, int height, int8_t SID, int8_t SCLK, int8_t DC,
+               int8_t RST, int8_t CS, int8_t SRCS, int8_t MISO,
+               int8_t BUSY = -1);
+  Adafruit_EPD(int width, int height, int8_t DC, int8_t RST, int8_t CS,
+               int8_t SRCS, int8_t BUSY = -1, SPIClass *spi = &SPI);
   ~Adafruit_EPD();
 
   void begin(bool reset = true);
@@ -132,7 +133,7 @@ protected:
   virtual void powerDown(void) = 0;
   void hardwareReset(void);
 
-  int16_t _dc_pin,                    ///< data/command pin
+  int8_t _dc_pin,                     ///< data/command pin
       _reset_pin,                     ///< reset pin
       _cs_pin,                        ///< chip select pin
       _busy_pin;                      ///< busy pin
@@ -194,18 +195,18 @@ protected:
   void dcLow();
 };
 
-#include "drivers/Adafruit_ACeP.h"
-#include "drivers/Adafruit_EK79686.h"
-#include "drivers/Adafruit_IL0373.h"
-#include "drivers/Adafruit_IL0398.h"
-#include "drivers/Adafruit_IL91874.h"
-#include "drivers/Adafruit_SSD1608.h"
-#include "drivers/Adafruit_SSD1619.h"
+// #include "drivers/Adafruit_ACeP.h"
+// #include "drivers/Adafruit_EK79686.h"
+// #include "drivers/Adafruit_IL0373.h"
+// #include "drivers/Adafruit_IL0398.h"
+// #include "drivers/Adafruit_IL91874.h"
+// #include "drivers/Adafruit_SSD1608.h"
+// #include "drivers/Adafruit_SSD1619.h"
 #include "drivers/Adafruit_SSD1675.h"
-#include "drivers/Adafruit_SSD1675B.h"
+// #include "drivers/Adafruit_SSD1675B.h"
 #include "drivers/Adafruit_SSD1680.h"
-#include "drivers/Adafruit_SSD1681.h"
-#include "drivers/Adafruit_UC8151D.h"
-#include "drivers/Adafruit_UC8276.h"
+// #include "drivers/Adafruit_SSD1681.h"
+// #include "drivers/Adafruit_UC8151D.h"
+// #include "drivers/Adafruit_UC8276.h"
 
 #endif /* _ADAFRUIT_EPD_H_ */

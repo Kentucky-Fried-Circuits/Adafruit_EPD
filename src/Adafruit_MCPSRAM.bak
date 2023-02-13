@@ -1,7 +1,8 @@
+﻿/**
 #include "Adafruit_MCPSRAM.h"
 #include <Arduino.h>
 #include <SPI.h>
-/**************************************************************************/
+************************************************************************/
 /*!
     @brief  Class constructor when using software SPI
                 @param mosi master out slave in pin
